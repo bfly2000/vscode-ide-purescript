@@ -1,5 +1,9 @@
 // module VSCode.Location
 
-import { Position, Location, Uri } from 'vscode';
+import { workspace, Position, Location, Uri } from 'vscode';
+import * as Path from 'path';
 
-export const mkLocation = (file : string) => (pos: Position) => new Location(Uri.file(file), pos); 
+export const mkLocation = (file : string) => (pos: Position) =>  {
+    var fullPath = Path.resolve(workspace.rootPath, file)
+    return new Location(Uri.file(fullPath), pos); 
+}
